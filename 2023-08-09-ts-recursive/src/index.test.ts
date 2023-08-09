@@ -18,6 +18,9 @@ describe("isValidExpression", () => {
     it("returns false for unclosed parens", () => {
       expect(isValidExpression("(")).toBe(false);
     });
+    it("returns false for unmatched closing parens", () => {
+      expect(isValidExpression(")")).toBe(false);
+    });
     it("returns false for mismatched closed paren/brace/bracked", () => {
       expect(isValidExpression("(]")).toBe(false);
     });

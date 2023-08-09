@@ -1,0 +1,19 @@
+{
+  "name": "kata-valid-braces",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Valid braces kata",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "Belén \"Benko\" Albeza",
+  "license": "MPL",
+  "devDependencies": {
+    "@types/node": "^20.4.9",
+    "typescript": "^5.1.6",
+    "vitest": "^0.34.1"
+  }
+}
