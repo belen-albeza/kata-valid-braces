@@ -1,13 +1,42 @@
 import { describe, it, expect } from "vitest";
 
-import { add } from "./index";
+import { isValidExpression } from "./index";
 
-describe("add", () => {
-  it("should add two numbers", () => {
-    expect(add(2, 2)).toBe(4);
+describe("isValidExpression", () => {
+  it("returns true on empty string", () => {
+    expect(isValidExpression("")).toBe(true);
   });
 
-  it("should work with zero", () => {
-    expect(add(0, 2)).toBe(2);
+  describe("simple expressions", () => {
+    it("returns true for closed parens", () => {
+      expect(isValidExpression("()")).toBe(true);
+    });
+    it("returns true for other variants of closed parens", () => {
+      expect(isValidExpression("[]")).toBe(true);
+      expect(isValidExpression("{}")).toBe(true);
+    });
+    it("returns false for unclosed parens", () => {
+      expect(isValidExpression("(")).toBe(false);
+    });
+    it("returns false for mismatched closed paren/brace/bracked", () => {
+      expect(isValidExpression("(]")).toBe(false);
+    });
+  });
+
+  describe("complex expressions", () => {
+    it("validates unnested expressions", () => {
+      expect(isValidExpression("()[]{}")).toBe(true);
+      expect(isValidExpression("()[]{}(]")).toBe(false);
+    });
+    it("validates nested expressions", () => {
+      expect(isValidExpression("({[]})")).toBe(true);
+    });
+    it("validates nested expressions with repeated characters", () => {
+      expect(isValidExpression("({{[]}})")).toBe(true);
+    });
+    it("returns false for invalid unnesting", () => {
+      expect(isValidExpression("({)}")).toBe(false);
+      expect(isValidExpression("[(])")).toBe(false);
+    });
   });
 });
